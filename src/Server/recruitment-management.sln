@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{990F4105-9985-454A-B193-3847FA6C5C3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F17D6EBD-100A-404E-9EA1-39C5F3310329}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "Services\IdentityServer\IdentityServer.csproj", "{02DBE414-C1B0-4FE7-BD25-F1DE42FA1210}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02DBE414-C1B0-4FE7-BD25-F1DE42FA1210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02DBE414-C1B0-4FE7-BD25-F1DE42FA1210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02DBE414-C1B0-4FE7-BD25-F1DE42FA1210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02DBE414-C1B0-4FE7-BD25-F1DE42FA1210}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{02DBE414-C1B0-4FE7-BD25-F1DE42FA1210} = {F17D6EBD-100A-404E-9EA1-39C5F3310329}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {02282767-98DB-473F-A1C0-AB6A4E2DCB0D}
+	EndGlobalSection
+EndGlobal
