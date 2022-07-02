@@ -1,4 +1,5 @@
-﻿using IdentityServer.API.Settings.Startup.Interfaces;
+﻿using IdentityServer.API.Settings.Dependencies.Infrastructure;
+using IdentityServer.API.Settings.Startup.Interfaces;
 
 namespace IdentityServer.API
 {
@@ -15,6 +16,7 @@ namespace IdentityServer.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDatabases(Configuration);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
