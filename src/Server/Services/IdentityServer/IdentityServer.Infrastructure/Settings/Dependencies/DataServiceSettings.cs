@@ -24,8 +24,8 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies
         }
 
         public static IServiceCollection ConfigureDatabase(this IServiceCollection services, string connectionString) =>
-            services.AddDbContext<IdentityDataContext>(options =>
-                options.UseSqlServer(connectionString));
-        
+            services
+                .AddDbContext<IdentityDataContext>(options =>
+                    options.UseSqlServer(connectionString));
     }
 }

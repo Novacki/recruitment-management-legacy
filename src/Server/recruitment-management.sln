@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Domain", "Se
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Infrastructure", "Services\IdentityServer\IdentityServer.Infrastructure\IdentityServer.Infrastructure.csproj", "{895FC026-3D3C-4268-86C3-8C05E5FE2943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.API", "Services\IdentityServer\IdentityServer.API\IdentityServer.API.csproj", "{751A9BD4-F286-4FCE-98C7-CA9C6BDC0CFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.API", "Services\IdentityServer\IdentityServer.API\IdentityServer.API.csproj", "{751A9BD4-F286-4FCE-98C7-CA9C6BDC0CFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

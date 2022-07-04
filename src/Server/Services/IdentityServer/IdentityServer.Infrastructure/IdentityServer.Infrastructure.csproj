@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Configurations\" />
+    <ProjectReference Include="..\IdentityServer.Domain\IdentityServer.Domain.csproj" />
   </ItemGroup>
 
 </Project>

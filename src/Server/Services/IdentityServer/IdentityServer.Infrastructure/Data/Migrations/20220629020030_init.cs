@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace IdentityServer.Infrastructure.Migrations
+namespace IdentityServer.Infrastructure.Data.Migrations
 {
     public partial class init : Migration
     {
