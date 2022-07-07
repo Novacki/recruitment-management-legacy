@@ -5,7 +5,7 @@ namespace IdentityServer.API.Controllers
 {
     public abstract class BaseController : Controller
     {
-        private readonly IMapper _mapper;
+        protected readonly IMapper _mapper;
 
         protected BaseController(IMapper mapper)
         {

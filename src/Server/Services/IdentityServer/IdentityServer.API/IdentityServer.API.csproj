@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Application\DTO%27s\Responses\" />
-    <Folder Include="Application\DTO%27s\Requests\" />
     <Folder Include="Application\ViewModels\" />
   </ItemGroup>
 

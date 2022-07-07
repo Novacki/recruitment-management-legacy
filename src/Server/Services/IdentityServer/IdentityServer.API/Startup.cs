@@ -37,6 +37,7 @@ namespace IdentityServer.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

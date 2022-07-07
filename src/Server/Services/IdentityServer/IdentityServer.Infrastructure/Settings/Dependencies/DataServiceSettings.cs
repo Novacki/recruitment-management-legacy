@@ -9,8 +9,9 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies
     {
         public static IServiceCollection ConfigureIdentityDatabase(this IServiceCollection services)
         {
-            services.AddIdentityCore<IdentityUser>(options => {
-                options.SignIn.RequireConfirmedAccount = true;
+            services.AddIdentity<IdentityUser, IdentityRole>(options => {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.User.RequireUniqueEmail = false;
                 options.Password = new PasswordOptions()
                 {
                     RequireLowercase = true,
@@ -18,7 +19,10 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies
                     RequiredLength = 8
                 };
 
-            }).AddEntityFrameworkStores<IdentityDataContext>();
+            })
+            .AddRoles<IdentityRole>()
+            .AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<IdentityDataContext>();
 
             return services;
         }
