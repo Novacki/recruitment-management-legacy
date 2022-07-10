@@ -3,6 +3,7 @@
     public record class IdentityUserRequest(
         string userName,
         string email,
+        string password,
         bool emailConfirmed = true
     );
 }

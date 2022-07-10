@@ -4,8 +4,8 @@ namespace IdentityServer.Domain.Services.Auth.Interfaces
 {
     public interface IAuthService
     {
-        Task CreateUserAsync(IdentityUser user);
+        Task CreateUserAsync(IdentityUser user, string password);
 
-        Task SingInAsync(IdentityUser user);
+        Task SingInAsync(IdentityUser user, string password);
     }
 }

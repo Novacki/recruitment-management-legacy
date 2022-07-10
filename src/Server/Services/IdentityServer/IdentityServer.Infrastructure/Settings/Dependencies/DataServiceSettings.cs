@@ -14,8 +14,11 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies
                 options.User.RequireUniqueEmail = false;
                 options.Password = new PasswordOptions()
                 {
-                    RequireLowercase = true,
                     RequireUppercase = true,
+                    RequireLowercase = false,
+                    RequireDigit = false,
+                    RequireNonAlphanumeric = false,
+                    RequiredUniqueChars = 0,
                     RequiredLength = 8
                 };
 
