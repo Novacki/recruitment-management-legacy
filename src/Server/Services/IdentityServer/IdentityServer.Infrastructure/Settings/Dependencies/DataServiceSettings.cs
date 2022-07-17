@@ -1,4 +1,5 @@
-﻿using IdentityServer.Infrastructure.Data.Contexts;
+﻿using IdentityServer.Infrastructure.Data.Backgroud.Migration;
+using IdentityServer.Infrastructure.Data.Contexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,7 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies
         public static IServiceCollection ConfigureDatabase(this IServiceCollection services, string connectionString) =>
             services
                 .AddDbContext<IdentityDataContext>(options =>
-                    options.UseSqlServer(connectionString));
+                    options.UseSqlServer(connectionString))
+                .AddHostedService<ExecuteBackgroundMigration>();
     }
 }
