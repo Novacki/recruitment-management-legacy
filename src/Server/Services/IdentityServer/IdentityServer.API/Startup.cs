@@ -37,6 +37,7 @@ namespace IdentityServer.API
 
             app.UseRouting();
 
+            app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
 

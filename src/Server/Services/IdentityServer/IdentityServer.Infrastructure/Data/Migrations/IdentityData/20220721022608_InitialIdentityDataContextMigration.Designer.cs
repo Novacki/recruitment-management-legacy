@@ -4,16 +4,18 @@ using IdentityServer.Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace IdentityServer.Infrastructure.Data.Migrations
+namespace IdentityServer.Infrastructure.Data.Migrations.IdentityData
 {
     [DbContext(typeof(IdentityDataContext))]
-    partial class IdentityDataContextModelSnapshot : ModelSnapshot
+    [Migration("20220721022608_InitialIdentityDataContextMigration")]
+    partial class InitialIdentityDataContextMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -9,7 +9,12 @@ namespace IdentityServer.Infrastructure.Data.Backgroud.Migration
         {
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken) =>
-            await _context.Database.MigrateAsync();
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            await _identityDataContext.Database.MigrateAsync();
+            await _configurationDbContext.Database.MigrateAsync();
+            await _persistedGrantDbContext.Database.MigrateAsync();
+        }
+            
     }
 }
