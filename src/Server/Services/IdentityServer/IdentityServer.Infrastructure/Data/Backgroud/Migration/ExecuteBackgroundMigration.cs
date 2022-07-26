@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IdentityServer.Infrastructure.Data.Contexts;
+using IdentityServer4.EntityFramework.DbContexts;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IdentityServer.Infrastructure.Data.Backgroud.Migration
@@ -11,9 +13,15 @@ namespace IdentityServer.Infrastructure.Data.Backgroud.Migration
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _identityDataContext.Database.MigrateAsync();
-            await _configurationDbContext.Database.MigrateAsync();
-            await _persistedGrantDbContext.Database.MigrateAsync();
+            await ApplyMigrations<IdentityDataContext>();
+            await ApplyMigrations<ConfigurationDbContext>();
+            await ApplyMigrations<PersistedGrantDbContext>();
+        }
+
+        private async Task ApplyMigrations<T>() where T : DbContext
+        {
+            using var scope = _serviceScopeFactory.CreateScope();
+            await scope.ServiceProvider.GetRequiredService<T>().Database.MigrateAsync();
         }
             
     }
