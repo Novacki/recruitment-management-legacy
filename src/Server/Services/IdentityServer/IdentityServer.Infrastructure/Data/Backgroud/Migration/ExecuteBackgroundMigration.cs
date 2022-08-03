@@ -13,15 +13,15 @@ namespace IdentityServer.Infrastructure.Data.Backgroud.Migration
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await ApplyMigrations<IdentityDataContext>();
-            await ApplyMigrations<ConfigurationDbContext>();
-            await ApplyMigrations<PersistedGrantDbContext>();
+            await ApplyMigrationsAsync<IdentityDataContext>();
+            await ApplyMigrationsAsync<ConfigurationDbContext>();
+            await ApplyMigrationsAsync<PersistedGrantDbContext>();
         }
 
-        private async Task ApplyMigrations<T>() where T : DbContext
+        private async Task ApplyMigrationsAsync<TContext>() where TContext : DbContext
         {
             using var scope = _serviceScopeFactory.CreateScope();
-            await scope.ServiceProvider.GetRequiredService<T>().Database.MigrateAsync();
+            await scope.ServiceProvider.GetRequiredService<TContext>().Database.MigrateAsync();
         }
             
     }
