@@ -1,5 +1,4 @@
 ﻿using IdentityServer.Infrastructure.Data.Backgroud.Migration;
-using IdentityServer.Infrastructure.Data.Backgroud.Seeds;
 using IdentityServer.Infrastructure.Data.Contexts;
 using IdentityServer.Infrastructure.Settings.Constants;
 using Microsoft.AspNetCore.Identity;
