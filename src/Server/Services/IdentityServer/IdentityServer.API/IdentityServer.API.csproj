@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Application\DTO%27s\Responses\" />
     <Folder Include="Application\ViewModels\" />
+    <Folder Include="wwwroot\images\login\" />
   </ItemGroup>
 
 </Project>

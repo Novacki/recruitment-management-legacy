@@ -4,24 +4,31 @@
 <div class="login-container">
     <div class="row form-container d-flex align-items-center justify-content-center">
         <div class="row card-login d-flex align-items-center justify-content-center">
-            <div>
-                <h3>Login</h3>
-                <div class="row">
-                    <div>
-                        <input placeholder="E-mail" class="form-control bg-dark btn-outline-secondary login-input" type="email">
+            <div class="row d-flex justify-content-between">
+                <div class="col col-md-8 form-components-container">
+                    <h2>Autorizador - SSO</h2>
+                    <h5 class="login-info">Entre com e-mail e senha para efetuar o login.</h5>
+                
+                    <div class="row input-container">
+                        <div>
+                            <input placeholder="E-mail" class="form-control bg-dark btn-outline-secondary login-input" type="email">
+                        </div>
+                        <div class="mt-2">
+                            <input placeholder="Senha" class="form-control bg-dark btn-outline-secondary login-input" type="password">
+                        </div>
                     </div>
-                    <div class="mt-2">
-                        <input placeholder="Senha" class="form-control bg-dark btn-outline-secondary login-input" type="password">
+                    <div class="d-flex flex-wrap justify-content-between mt-3">
+                        <div>
+                            <button type="button" class="btn btn-outline-secondary mr-2">Entrar</button>
+                            <button type="button" class="btn btn-outline-secondary mr-2">Esqueceu a senha?</button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-secondary">Registrar-se</button>
+                        </div>
                     </div>
                 </div>
-                <div class="d-flex flex-wrap justify-content-between mt-2">
-                    <div>
-                        <button type="button" class="btn btn-outline-secondary mr-2">Entrar</button>
-                        <button type="button" class="btn btn-outline-secondary mr-2">Esqueceu a senha?</button>
-                    </div>
-                    <div>
-                        <button type="button" class="btn btn-outline-secondary">Registrar-se</button>
-                    </div>
+                <div class="col col-md-4 d-flex align-items-center justify-content-center image-login-container">
+                    <img height="215" width="215" src="./images/login/login.png">
                 </div>
             </div>
         </div>

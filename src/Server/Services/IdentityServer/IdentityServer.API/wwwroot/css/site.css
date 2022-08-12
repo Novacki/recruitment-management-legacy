@@ -1,3 +1,12 @@
 body {
     background-color: rgba(21,25,29, 0.6);
+    height: 98vh;
+}
+
+main {
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
 }
