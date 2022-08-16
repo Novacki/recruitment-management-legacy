@@ -1,35 +1,32 @@
-﻿using AutoMapper;
-using IdentityServer.API.Application.DTO_s.Requests;
-using IdentityServer.Domain.Services.Auth.Interfaces;
-using Microsoft.AspNetCore.Identity;
+﻿using IdentityServer.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace IdentityServer.API.Controllers
 {
-    [ApiController()]
-    [Route("api/[controller]")]
-    public class AuthController : BaseController
+    public class AuthController : Controller
     {
-        private readonly IAuthService _authService;
-        public AuthController(
-            IMapper mapper, 
-            IAuthService authService) : base(mapper)
+        private readonly ILogger<AuthController> _logger;
+
+        public AuthController(ILogger<AuthController> logger)
         {
-            _authService = authService;
+            _logger = logger;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UserRegister(IdentityUserRequest request)
+        public IActionResult Index()
         {
-            await _authService.CreateUserAsync(_mapper.Map<IdentityUser>(request), request.password);
-            return Ok();
+            return View();
         }
 
-        [HttpPost("SignIn")]
-        public async Task<IActionResult> UserSignIn(IdentityUserRequest request)
+        public IActionResult Privacy()
         {
-            await _authService.SingInAsync(_mapper.Map<IdentityUser>(request), request.password);
-            return Ok();
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
