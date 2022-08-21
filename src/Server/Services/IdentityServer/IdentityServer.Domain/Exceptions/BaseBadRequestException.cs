@@ -2,7 +2,7 @@
 {
     public abstract class BaseBadRequestException : Exception
     {
-        public BaseBadRequestException() {}
+        protected BaseBadRequestException() {}
         protected BaseBadRequestException(string message) : base(message) { }
     }
 }

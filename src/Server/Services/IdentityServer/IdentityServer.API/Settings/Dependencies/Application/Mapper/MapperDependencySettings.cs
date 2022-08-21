@@ -4,7 +4,7 @@ using IdentityServer.API.Application.Mapper.Responses;
 
 namespace IdentityServer.API.Settings.Dependencies.Application.Mapper
 {
-    public static class MapperDependencyServices
+    public static class MapperDependencySettings
     {
         public static IServiceCollection ConfigureMapperServices(this IServiceCollection services)
         {

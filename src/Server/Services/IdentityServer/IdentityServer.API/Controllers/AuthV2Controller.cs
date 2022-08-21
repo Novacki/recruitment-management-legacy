@@ -21,14 +21,14 @@ namespace IdentityServer.API.Controllers
         [HttpPost]
         public async Task<IActionResult> UserRegister(IdentityUserRequest request)
         {
-            await _authService.CreateUserAsync(_mapper.Map<IdentityUser>(request), request.password);
+            await _authService.CreateUserAsync(_mapper.Map<IdentityUser>(request), request.Password);
             return Ok();
         }
 
         [HttpPost("SignIn")]
         public async Task<IActionResult> UserSignIn(IdentityUserRequest request)
         {
-            await _authService.SingInAsync(_mapper.Map<IdentityUser>(request), request.password);
+            await _authService.SingInAsync(_mapper.Map<IdentityUser>(request), request.Password);
             return Ok();
         }
     }

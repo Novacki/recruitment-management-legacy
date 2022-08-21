@@ -2,5 +2,12 @@
 {
     public class UserNotCreatedException : BaseBadRequestException
     {
+        public UserNotCreatedException()
+        {
+        }
+
+        public UserNotCreatedException(string message) : base(message)
+        {
+        }
     }
 }
