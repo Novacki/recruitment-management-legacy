@@ -6,7 +6,7 @@ namespace IdentityServer.API.Settings.Startup
     {
         public static void UseStartup<TStartup>(this WebApplicationBuilder builder) where TStartup : IStartupSettings, new()
         {
-            var startup = new TStartup().AddConfiguration(builder.Configuration);
+            var startup = new TStartup().AddConfiguration(builder.Configuration).AddAppSettings();
    
             startup.ConfigureServices(builder.Services);
 

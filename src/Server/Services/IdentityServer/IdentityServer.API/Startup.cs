@@ -1,34 +1,37 @@
-﻿using IdentityModel;
+﻿using IdentityServer.API.Settings;
 using IdentityServer.API.Settings.Dependencies.Application.Auth;
 using IdentityServer.API.Settings.Dependencies.Application.Mapper;
 using IdentityServer.API.Settings.Dependencies.Application.Services;
 using IdentityServer.API.Settings.Dependencies.Domain;
 using IdentityServer.API.Settings.Dependencies.Infrastructure;
 using IdentityServer.API.Settings.Startup.Interfaces;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using static IdentityServer4.IdentityServerConstants;
 
 namespace IdentityServer.API
 {
     public class Startup: IStartupSettings
     {
         public IConfiguration Configuration { get; private set; }
-
+        public AppSettings AppSettings { get; private set; }
         public IStartupSettings AddConfiguration(IConfiguration configuration)
         {
             Configuration = configuration;
             return this;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public IStartupSettings AddAppSettings()
         {
-            services.AddControllersWithViews();
+            AppSettings = Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
+            return this;
+        }
 
+        public void ConfigureServices(IServiceCollection services)
+        { 
+        
+            services.AddSingleton(AppSettings);
+            services.AddControllersWithViews();
             services
                 .ConfigureInfrastructureServices(Configuration)
-                .ConfigureAuthServices(Configuration)
+                .ConfigureAuthServices(Configuration, AppSettings.AuthSettings.CookieSettings)
                 .ConfigureApplicationServices()
                 .ConfigureMapperServices()
                 .ConfigureDomainServices();
