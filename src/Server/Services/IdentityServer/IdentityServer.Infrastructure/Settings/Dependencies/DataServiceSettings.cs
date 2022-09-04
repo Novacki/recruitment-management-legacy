@@ -1,6 +1,7 @@
 ﻿using IdentityServer.Infrastructure.Data.Backgroud.Migration;
 using IdentityServer.Infrastructure.Data.Contexts;
 using IdentityServer.Infrastructure.Settings.Constants;
+using IdentityServer.Infrastructure.Settings.Temp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,11 +42,12 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies
                 .AddHostedService<ExecuteBackgroundMigration>();
 
 
-        public static IServiceCollection ConfigureIdentityServer4Database(this IServiceCollection services, string connectionString)
+        public static void ConfigureIdentityServer4Database(this IIdentityServerBuilder identityServerBuilder, string connectionString)
         {
-            services
-                .AddIdentityServer()
-                .AddAspNetIdentity<IdentityUser>()
+            identityServerBuilder
+                .AddInMemoryClients(Config.Clients)
+                .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiResources(Config.ApiResources)
                 .AddConfigurationStore(options =>
                 {
                     options.DefaultSchema = DataBase.Schema;
@@ -64,8 +66,6 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies
 
                 })
                 .AddDeveloperSigningCredential();
-
-            return services;
         }
 
         private static string? GetMigrationsAssemblyName() =>

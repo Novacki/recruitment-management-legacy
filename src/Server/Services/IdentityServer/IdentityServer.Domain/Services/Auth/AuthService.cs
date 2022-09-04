@@ -2,6 +2,7 @@
 using IdentityServer.Domain.Helpers.Extensions.Commons;
 using IdentityServer.Domain.Services.Auth.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace IdentityServer.Domain.Services.Auth
 {
@@ -27,13 +28,32 @@ namespace IdentityServer.Domain.Services.Auth
                 throw new UserNotCreatedException();
         }
 
-        public async Task SingInAsync(IdentityUser user, string password)
+        public async Task<IdentityUser> SingInAsync(IdentityUser userLogin, string password)
         {
-            var userResult = await _userMananger.FindByEmailAsync(user.Email);
-            if (userResult.NotExist())
+            var user = await _userMananger.FindByEmailAsync(userLogin.Email);
+            if (user.NotExist())
                 throw new UserNotFoundException();
 
-            await ExecuteSingInAsync(userResult, password);
+            await ExecuteSingInAsync(user, password);
+            return user;
+        }
+
+        public async Task<IEnumerable<Claim>> GetUserClaimsAsync(IdentityUser userLogin)
+        {
+            var user = await _userMananger.FindByEmailAsync(userLogin.Email);
+            if (user.NotExist())
+                throw new UserNotFoundException();
+
+            return await _userMananger.GetClaimsAsync(user);
+        }
+
+        public async Task<IEnumerable<string>> GetUserRolesAsync(IdentityUser userLogin)
+        {
+            var user = await _userMananger.FindByEmailAsync(userLogin.Email);
+            if (user.NotExist())
+                throw new UserNotFoundException();
+
+            return await _userMananger.GetRolesAsync(user);
         }
 
         private async Task ExecuteSingInAsync(IdentityUser user, string password)

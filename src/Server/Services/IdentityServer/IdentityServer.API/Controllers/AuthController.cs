@@ -1,31 +1,45 @@
 ﻿using AutoMapper;
 using IdentityServer.API.Application.DTO_s.Requests;
-using IdentityServer.Domain.Services.Auth.Interfaces;
-using Microsoft.AspNetCore.Identity;
+using IdentityServer.API.Application.Services.IdentityServer.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using static IdentityServer4.IdentityServerConstants;
 
 namespace IdentityServer.API.Controllers
 {
-    public class AuthController : BaseController
+    [Authorize(Roles = "Administrator")]
+    public class AuthController : Controller
     {
-        private readonly IAuthService _authService;
-        public AuthController(IMapper mapper, IAuthService authService) : base(mapper)
+        private readonly IIdentityServerService _identityServerService;
+
+        public AuthController(IIdentityServerService identityServerService)
         {
-            _authService = authService;
+            _identityServerService = identityServerService;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        [AllowAnonymous]
+        public IActionResult SignIn() => View();
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> SignIn(IdentityUserRequest request, string? redirectUrl)
         {
-            return View();
+            var indentityServerUser = await _identityServerService.GetAuthenticatedIdentityServerUser(request);
+            await HttpContext.SignInAsync(indentityServerUser.CreatePrincipal());
+
+            if (string.IsNullOrEmpty(redirectUrl))
+                return RedirectToAction("Teste");
+
+            return Redirect(redirectUrl);
         }
 
-        [HttpPost("SignIn")]
-        public async Task<IActionResult> SignIn(IdentityUserRequest request)
-        {
-            await _authService.SingInAsync(_mapper.Map<IdentityUser>(request), request.Password);
-            return View();
-        }
+        [HttpGet]
+        public IActionResult Teste() => Ok("Cookies");
+
+        [HttpPost]
+        public IActionResult SignOut() => SignOut("Cookies", ProtocolTypes.OpenIdConnect);
+        
     }
 }
