@@ -2,13 +2,14 @@
 using IdentityServer.API.Application.DTO_s.Requests;
 using IdentityServer.API.Application.Services.IdentityServer.Interfaces;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static IdentityServer4.IdentityServerConstants;
 
 namespace IdentityServer.API.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
     public class AuthController : Controller
     {
         private readonly IIdentityServerService _identityServerService;
@@ -30,16 +31,13 @@ namespace IdentityServer.API.Controllers
             await HttpContext.SignInAsync(indentityServerUser.CreatePrincipal());
 
             if (string.IsNullOrEmpty(redirectUrl))
-                return RedirectToAction("Teste");
+                return RedirectToAction("Index", "Users");
 
             return Redirect(redirectUrl);
         }
 
-        [HttpGet]
-        public IActionResult Teste() => Ok("Cookies");
-
         [HttpPost]
-        public IActionResult SignOut() => SignOut("Cookies", ProtocolTypes.OpenIdConnect);
+        public IActionResult SignOut() => SignOut(CookieAuthenticationDefaults.AuthenticationScheme, ProtocolTypes.OpenIdConnect);
         
     }
 }

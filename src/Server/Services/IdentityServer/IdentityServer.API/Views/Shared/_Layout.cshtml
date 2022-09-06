@@ -6,13 +6,31 @@
     <title>@ViewData["Title"] - IdentityServer.API</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/auth/auth.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/users/users.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/IdentityServer.API.styles.css" asp-append-version="true" />
 </head>
 <body>
     <div class="container-fluid">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div class="menu-container">
+                <div class="d-flex justify-justify-content-center menu">
+                    <div class="side-menu">
+                        <div class="d-flex flex-column justify-justify-content-center align-items-center profile-container">
+                            <div class="profile-photo"></div>
+                            <span>@ViewData["User"]</span>
+                        </div>
+                        <h1 class="menu-module">Gerenciamento de Usuários</h1>
+                        <ul class="menu-list">
+                            <li class="menu-item">Usuários</li>
+                            <li class="menu-item">Roles</li>
+                            <li class="menu-item">Claims</li>
+                        </ul>
+                    </div>
+                    <div class="content">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

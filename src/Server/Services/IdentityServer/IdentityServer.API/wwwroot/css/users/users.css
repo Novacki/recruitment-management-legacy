@@ -1,0 +1,71 @@
+﻿.menu-container {
+    height: 96vh;
+}
+
+.menu {
+    height: 100%;
+}
+
+.profile-container {
+    height: 20vh;
+    border: 3px solid rgba(21,25,29, 0.9);
+    margin-bottom: 5%;
+    padding: 5%;
+    border-radius: 6px;
+}
+
+.profile-photo {
+    border-radius: 100%;
+    background-color: white;
+    height: 15vh;
+    width: 15vh;
+}
+
+.menu-module {
+    font-size: 16px;
+    display: block;
+    background: rgba(21,25,29, 0.4);
+    border: 3px solid rgba(21,25,29, 0.9);
+    padding: 3%;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 1%;
+}
+
+.menu-item {
+    padding: 1%;
+    display: block;
+    border: 2px solid rgba(21,25,29, 0.9);
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 4%;
+}
+
+.menu-item:hover {
+    font-weight: 600;
+    background: rgba(21,25,29, 0.4);
+}
+
+.side-menu, .content {
+    color: white;
+    height: 100%;
+    padding: 1%;
+    border-radius: 6px;
+}
+
+.content {
+    box-shadow: 7px 0px 7px 7px rgb(35 32 32 / 40%);
+    width: 100%;
+    margin: 1% 0;
+}
+
+.side-menu {
+    width: 15%;
+    background-color: rgba(21,25,29, 0.7);
+    box-shadow: 5px 5px 5px rgba(35, 32, 32, 0.4);
+    margin: 1% 1% 1% 0;
+}
