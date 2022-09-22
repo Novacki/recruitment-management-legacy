@@ -13,9 +13,9 @@ namespace IdentityServer.Infrastructure.Data.Backgroud.Migration
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            //await ApplyMigrationsAsync<IdentityDataContext>();
-            //await ApplyMigrationsAsync<ConfigurationDbContext>();
-            //await ApplyMigrationsAsync<PersistedGrantDbContext>();
+            await ApplyMigrationsAsync<IdentityDataContext>();
+            await ApplyMigrationsAsync<ConfigurationDbContext>();
+            await ApplyMigrationsAsync<PersistedGrantDbContext>();
         }
 
         private async Task ApplyMigrationsAsync<TContext>() where TContext : DbContext
