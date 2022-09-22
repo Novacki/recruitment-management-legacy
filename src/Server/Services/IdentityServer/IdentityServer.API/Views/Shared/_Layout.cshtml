@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/users/users.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/users/index.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/IdentityServer.API.styles.css" asp-append-version="true" />
 </head>
 <body>
@@ -26,9 +27,9 @@
                         </div>
                         <h1 class="menu-module">Gerenciamento de Usuários</h1>
                         <ul class="menu-list">
-                            <li class="menu-item">Usuários</li>
-                            <li class="menu-item">Roles</li>
-                            <li class="menu-item">Claims</li>
+                            <li class="menu-item-container"><a class="menu-item" asp-action="index">Usuários</a></li>
+                            <li class="menu-item-container">Roles</li>
+                            <li class="menu-item-container">Claims</li>
                         </ul>
                     </div>
                     <div class="content">

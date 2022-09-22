@@ -45,7 +45,7 @@
     padding: 1%;
 }
 
-.menu-item {
+.menu-item-container {
     padding: 1%;
     display: block;
     border: 2px solid rgba(21,25,29, 0.9);
@@ -54,7 +54,17 @@
     margin-top: 4%;
 }
 
+.menu-item {
+    text-decoration: none;
+    text-transform: none;
+    color: white;
+}
+
 .menu-item:hover {
+    color: white;
+}
+
+.menu-item-container:hover {
     font-weight: 600;
     background: rgba(21,25,29, 0.4);
 }
@@ -77,4 +87,10 @@
     background-color: rgba(21,25,29, 0.7);
     box-shadow: 5px 5px 5px rgba(35, 32, 32, 0.4);
     margin: 1% 1% 1% 0;
+}
+
+.table-container {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 7px 0px 7px 7px rgb(35 32 32 / 40%);
 }
