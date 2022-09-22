@@ -7,7 +7,6 @@
 }
 
 .profile-container {
-    height: 20vh;
     border: 3px solid rgba(21,25,29, 0.9);
     margin-bottom: 5%;
     padding: 5%;
@@ -19,6 +18,16 @@
     background-color: white;
     height: 15vh;
     width: 15vh;
+}
+
+.user-manager-container {
+    width: 100%
+}
+
+.user-profile {
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .menu-module {

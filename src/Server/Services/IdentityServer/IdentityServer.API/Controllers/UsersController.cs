@@ -13,5 +13,8 @@ namespace IdentityServer.API.Controllers
 
         [HttpGet]
         public IActionResult Index() => View();
+
+        [HttpGet]
+        public IActionResult Create() => View();
     }
 }

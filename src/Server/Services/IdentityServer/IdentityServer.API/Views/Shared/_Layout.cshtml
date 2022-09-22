@@ -15,9 +15,14 @@
             <div class="menu-container">
                 <div class="d-flex justify-justify-content-center menu">
                     <div class="side-menu">
-                        <div class="d-flex flex-column justify-justify-content-center align-items-center profile-container">
+                        <div class="d-flex flex-column justify-content-center align-items-center profile-container">
                             <div class="profile-photo"></div>
-                            <span>@ViewData["User"]</span>
+                            <div class="mt-2">
+                                <span class="username">@ViewData["Username"]</span>
+                            </div>
+                            <div class="mt-2 d-flex flex-column justify-content-center align-items-center user-manager-container">
+                                <button type="button" class="btn btn-outline-secondary user-profile">Perfil</button>
+                            </div>
                         </div>
                         <h1 class="menu-module">Gerenciamento de Usuários</h1>
                         <ul class="menu-list">
