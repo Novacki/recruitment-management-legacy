@@ -1,11 +1,7 @@
 ﻿namespace IdentityServer.Domain.Exceptions.Services.Auth
 {
-    public class UserNotLoggedException : BaseBadRequestException
+    public class UserNotLoggedException : InvalidOperationServiceException
     {
-        public UserNotLoggedException()
-        {
-        }
-
         public UserNotLoggedException(string message) : base(message)
         {
         }

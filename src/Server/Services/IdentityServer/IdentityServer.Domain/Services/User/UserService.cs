@@ -22,14 +22,14 @@ namespace IdentityServer.Domain.Services.User
             var haveErrosInCreation = !identityResult.Succeeded;
 
             if (haveErrosInCreation)
-                throw new UserNotCreatedException();
+                throw new UserNotCreatedException(" a");
         }
 
         public async Task<IEnumerable<Claim>> GetUserClaimsAsync(IdentityUser userLogin)
         {
             var user = await _userMananger.FindByEmailAsync(userLogin.Email);
             if (user.NotExist())
-                throw new UserNotFoundException();
+                throw new UserNotFoundException(" a");
 
             return await _userMananger.GetClaimsAsync(user);
         }
@@ -38,7 +38,7 @@ namespace IdentityServer.Domain.Services.User
         {
             var user = await _userMananger.FindByEmailAsync(userLogin.Email);
             if (user.NotExist())
-                throw new UserNotFoundException();
+                throw new UserNotFoundException(" a");
 
             return await _userMananger.GetRolesAsync(user);
         }

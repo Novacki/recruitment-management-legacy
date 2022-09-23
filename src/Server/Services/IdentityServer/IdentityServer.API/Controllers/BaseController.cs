@@ -10,5 +10,7 @@ namespace IdentityServer.API.Controllers
         {
             _mapper = mapper;
         }
+
+        protected bool InvalidRequest() => !ModelState.IsValid;
     }
 }

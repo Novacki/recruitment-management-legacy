@@ -23,7 +23,7 @@ namespace IdentityServer.Domain.Services.Auth
         {
             var user = await _userMananger.FindByEmailAsync(userLogin.Email);
             if (user.NotExist())
-                throw new UserNotFoundException();
+                throw new UserNotFoundException(" a");
 
             await ExecuteSignInAsync(user, password);
             return user;
@@ -38,7 +38,7 @@ namespace IdentityServer.Domain.Services.Auth
 
             var haveErrosInSignIn = !signInResult.Succeeded;
             if (haveErrosInSignIn)
-                throw new UserNotLoggedException();
+                throw new UserNotLoggedException(" a");
         }
     }
 }

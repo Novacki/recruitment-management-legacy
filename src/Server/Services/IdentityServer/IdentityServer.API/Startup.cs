@@ -4,6 +4,7 @@ using IdentityServer.API.Settings.Dependencies.Application.Mapper;
 using IdentityServer.API.Settings.Dependencies.Application.Services;
 using IdentityServer.API.Settings.Dependencies.Domain;
 using IdentityServer.API.Settings.Dependencies.Infrastructure;
+using IdentityServer.API.Settings.Filters.Exceptions;
 using IdentityServer.API.Settings.Startup.Interfaces;
 
 namespace IdentityServer.API
@@ -28,7 +29,8 @@ namespace IdentityServer.API
         { 
         
             services.AddSingleton(AppSettings);
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options => options.Filters.Add<ApplicationExceptionFilter>());
+
             services
                 .ConfigureInfrastructureServices(Configuration)
                 .ConfigureAuthServices(Configuration, AppSettings.AuthSettings.CookieSettings)

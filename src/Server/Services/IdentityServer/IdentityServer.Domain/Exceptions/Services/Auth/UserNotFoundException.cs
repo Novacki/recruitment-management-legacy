@@ -1,11 +1,7 @@
 ﻿namespace IdentityServer.Domain.Exceptions.Services.Auth
 {
-    public class UserNotFoundException : BaseNotFoundException
+    public class UserNotFoundException : NotFoundServiceException
     {
-        public UserNotFoundException()
-        {
-        }
-
         public UserNotFoundException(string message) : base(message)
         {
         }

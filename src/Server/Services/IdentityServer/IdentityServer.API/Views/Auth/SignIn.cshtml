@@ -12,7 +12,11 @@
                     <form asp-action="SignIn">
                         <div class="row input-container form-group">
                             <div>
-                                <input required asp-for="Email" placeholder="E-mail" class="form-control bg-dark btn-outline-secondary login-input" type="email">
+                                <input 
+                                    required 
+                                    asp-for="Email" 
+                                    placeholder="E-mail" 
+                                    class="form-control bg-dark btn-outline-secondary login-input" type="email">
                             </div>
                             <div class="mt-2">
                                 <input required asp-for="Password" placeholder="Senha" class="form-control bg-dark btn-outline-secondary login-input" type="password">
@@ -28,6 +32,7 @@
                             </div>
                         </div>
                     </form>
+                    <span>@Context.Items["ErrorMessage"]</span>
                 </div>
                 <div class="col col-md-4 d-flex align-items-center justify-content-center image-login-container">
                     <img height="215" width="215" src="./../images/auth/auth.png">
