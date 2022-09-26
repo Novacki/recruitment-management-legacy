@@ -20,12 +20,8 @@ namespace IdentityServer.API.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult SignIn([FromQuery] string message)
-        {
-            ViewData["ErrorMessage"] = message;
-            return View();
-        }
-
+        public IActionResult SignIn() => View();
+ 
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> SignIn(IdentityUserRequest request, string? redirectUrl)

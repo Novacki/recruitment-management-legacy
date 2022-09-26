@@ -47,6 +47,7 @@ namespace IdentityServer.API
                 app.UseHsts();
             }
 
+            app.UseStatusCodePages();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

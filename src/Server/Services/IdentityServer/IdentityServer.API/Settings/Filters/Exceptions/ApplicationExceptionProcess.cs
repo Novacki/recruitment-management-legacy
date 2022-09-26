@@ -16,11 +16,11 @@ namespace IdentityServer.API.Settings.Filters.Exceptions
 
         private Dictionary<Type, BaseResponseError> ExceptionResults => new()
         {
-            { typeof(NotFoundServiceException),  new NotFoundResponseError(GetErrorMessage(), StatusCodes.Status404NotFound) },
-            { typeof(InvalidOperationServiceException),  new NotFoundResponseError(GetErrorMessage(), StatusCodes.Status400BadRequest) },
+            { typeof(NotFoundServiceException),  new NotFoundResponseError(_context.Exception.Message, StatusCodes.Status404NotFound) },
+            { typeof(InvalidOperationServiceException),  new BadRequestResponseError(_context.Exception.Message, StatusCodes.Status400BadRequest) },
         };
 
-        private BaseResponseError DefaultExceptionResult => new InternalServerResponseError(GetErrorMessage(), StatusCodes.Status500InternalServerError);
+        private BaseResponseError DefaultExceptionResult => new InternalServerResponseError(_context.Exception.Message, StatusCodes.Status500InternalServerError);
 
         public string GetErrorMessage() => $"Error: {_context.Exception.Message} {_context.Exception.StackTrace}";
         public string GetExceptionName() => nameof(_context.Exception);

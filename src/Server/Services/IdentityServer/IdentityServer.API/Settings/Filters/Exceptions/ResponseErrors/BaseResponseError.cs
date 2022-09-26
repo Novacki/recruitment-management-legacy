@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors
 {
@@ -15,11 +18,60 @@ namespace IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors
         public override async Task ExecuteResultAsync(ActionContext context)
         {
 
-            context.ModelState.AddModelError("ErrorMessage", Message);
-            context.HttpContext.Items.Add("ErrorMessage", Message);
-            context.HttpContext.Response.Redirect($"{context.HttpContext.Request.Path}?message='a'");
-            //context.HttpContext.Response.Redirect($"{context.HttpContext.Request.Path}?message={Message}");
-            //await context.HttpContext.Response.WriteAsJsonAsync(Message);
+            SetViewName(context)
+                .SetViewData(context)
+                .SetTempData(context)
+                .SetViewEngine(context)
+                .SetViewName(context)
+                .SetErrorMessage();
+
+           await base.ExecuteResultAsync(context);
+        }
+
+        protected BaseResponseError SetViewName(ActionContext context)
+        {
+            const string ACTION = "action";
+            ViewName = context.RouteData.Values.GetValueOrDefault(ACTION)?.ToString();
+
+            return this;
+        }
+
+        protected BaseResponseError SetViewEngine(ActionContext context)
+        {
+            var compositeViewEngine = context.HttpContext.RequestServices.GetRequiredService<ICompositeViewEngine>();
+            ViewEngine = compositeViewEngine;
+
+            return this;
+        }
+
+        protected BaseResponseError SetViewData(ActionContext context)
+        {
+            var metadataProvider = context.HttpContext.RequestServices.GetRequiredService<IModelMetadataProvider>();
+            ViewData = new ViewDataDictionary(metadataProvider, new ModelStateDictionary());
+            
+            return this;
+        }
+
+        protected BaseResponseError SetTempData(ActionContext context)
+        {
+            var tempDataProvider = context.HttpContext.RequestServices.GetRequiredService<ITempDataProvider>();
+            TempData = new TempDataDictionary(context.HttpContext, tempDataProvider);
+
+            return this;
+        }
+
+        protected BaseResponseError SetErrorMessage()
+        {
+            const string ERROR_MESSAGE = "ErrorMessage";
+            ViewData[ERROR_MESSAGE] = Message;
+            
+            return this;
+        }
+
+        protected BaseResponseError SetStatusCode(int statusCode)
+        {
+            StatusCode = statusCode;
+            return this;
         }
     }
 }

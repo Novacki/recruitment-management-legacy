@@ -1,4 +1,5 @@
-﻿using IdentityServer.Domain.Exceptions.Services.Auth;
+﻿using IdentityServer.Domain.Constants.ErrorMessages;
+using IdentityServer.Domain.Exceptions.Services.Auth;
 using IdentityServer.Domain.Helpers.Extensions.Commons;
 using IdentityServer.Domain.Services.User.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -22,14 +23,14 @@ namespace IdentityServer.Domain.Services.User
             var haveErrosInCreation = !identityResult.Succeeded;
 
             if (haveErrosInCreation)
-                throw new UserNotCreatedException(" a");
+                throw new UserNotCreatedException(UserErrorMessages.UserNotCreated);
         }
 
         public async Task<IEnumerable<Claim>> GetUserClaimsAsync(IdentityUser userLogin)
         {
             var user = await _userMananger.FindByEmailAsync(userLogin.Email);
             if (user.NotExist())
-                throw new UserNotFoundException(" a");
+                throw new UserNotFoundException(UserErrorMessages.UserNotFound);
 
             return await _userMananger.GetClaimsAsync(user);
         }
@@ -38,7 +39,7 @@ namespace IdentityServer.Domain.Services.User
         {
             var user = await _userMananger.FindByEmailAsync(userLogin.Email);
             if (user.NotExist())
-                throw new UserNotFoundException(" a");
+                throw new UserNotFoundException(UserErrorMessages.UserNotFound);
 
             return await _userMananger.GetRolesAsync(user);
         }

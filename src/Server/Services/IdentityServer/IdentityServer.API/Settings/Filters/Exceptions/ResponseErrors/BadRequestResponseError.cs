@@ -7,9 +7,5 @@ namespace IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors
         public BadRequestResponseError(string message, int statusCode) : base(message, statusCode)
         {
         }
-
-        //public override Task ExecuteResultAsync(ActionContext context)
-        //{
-        //}
     }
 }

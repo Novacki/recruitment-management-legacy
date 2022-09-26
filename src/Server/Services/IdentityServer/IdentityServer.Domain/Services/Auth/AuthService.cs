@@ -1,8 +1,8 @@
-﻿using IdentityServer.Domain.Exceptions.Services.Auth;
+﻿using IdentityServer.Domain.Constants.ErrorMessages;
+using IdentityServer.Domain.Exceptions.Services.Auth;
 using IdentityServer.Domain.Helpers.Extensions.Commons;
 using IdentityServer.Domain.Services.Auth.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 
 namespace IdentityServer.Domain.Services.Auth
 {
@@ -23,7 +23,7 @@ namespace IdentityServer.Domain.Services.Auth
         {
             var user = await _userMananger.FindByEmailAsync(userLogin.Email);
             if (user.NotExist())
-                throw new UserNotFoundException(" a");
+                throw new UserNotFoundException(UserErrorMessages.UserNotAuthenticated);
 
             await ExecuteSignInAsync(user, password);
             return user;
@@ -38,7 +38,7 @@ namespace IdentityServer.Domain.Services.Auth
 
             var haveErrosInSignIn = !signInResult.Succeeded;
             if (haveErrosInSignIn)
-                throw new UserNotLoggedException(" a");
+                throw new UserNotLoggedException(UserErrorMessages.UserNotAuthenticated);
         }
     }
 }
