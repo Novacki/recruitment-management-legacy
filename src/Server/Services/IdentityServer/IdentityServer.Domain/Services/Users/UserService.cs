@@ -1,11 +1,11 @@
 ﻿using IdentityServer.Domain.Constants.ErrorMessages;
 using IdentityServer.Domain.Exceptions.Services.Auth;
 using IdentityServer.Domain.Helpers.Extensions.Commons;
-using IdentityServer.Domain.Services.User.Interfaces;
+using IdentityServer.Domain.Services.Users.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
-namespace IdentityServer.Domain.Services.User
+namespace IdentityServer.Domain.Services.Users
 {
     public class UserService : IUserService
     {

@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using IdentityServer.API.Application.DTO_s.Requests;
-using IdentityServer.API.Application.DTO_s.Responses;
 using IdentityServer.API.Application.Helpers.Builders.IdentityServer;
 using IdentityServer.API.Application.Services.IdentityServer.Interfaces;
 using IdentityServer.Domain.Services.Auth.Interfaces;
-using IdentityServer.Domain.Services.User.Interfaces;
+using IdentityServer.Domain.Services.Users.Interfaces;
 using IdentityServer4;
 using Microsoft.AspNetCore.Identity;
 

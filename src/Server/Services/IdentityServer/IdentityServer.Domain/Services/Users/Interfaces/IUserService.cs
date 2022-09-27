@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
-namespace IdentityServer.Domain.Services.User.Interfaces
+namespace IdentityServer.Domain.Services.Users.Interfaces
 {
     public interface IUserService
     {
