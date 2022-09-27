@@ -1,0 +1,10 @@
+﻿@{
+    bool hasError = ViewData["ErrorMessage"] != null;
+}
+
+@if(hasError)
+{
+    <div class="error-container mt-2">
+        <span>@ViewData["ErrorMessage"]</span>
+    </div>
+}
