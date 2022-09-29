@@ -4,7 +4,7 @@ using IdentityServer.Domain.Services.Users;
 using IdentityServer.Domain.Services.Users.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace IdentityServer.Domain.Settings.Dependencies
+namespace IdentityServer.Domain.Settings.Dependencies.Services
 {
     public static class DomainServicesSettings
     {
@@ -12,6 +12,6 @@ namespace IdentityServer.Domain.Settings.Dependencies
             services
                 .AddScoped<IAuthService, AuthService>()
                 .AddScoped<IUserService, UserService>();
-        
+
     }
 }

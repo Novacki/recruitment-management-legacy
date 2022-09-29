@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using IdentityServer.API.Application.DTO_s.Requests;
-using Microsoft.AspNetCore.Identity;
+using IdentityServer.Domain.Entities.Users;
 
 namespace IdentityServer.API.Application.Mapper.Requests
 {
@@ -8,7 +8,7 @@ namespace IdentityServer.API.Application.Mapper.Requests
     {
         public MappingRequest()
         {
-            CreateMap<IdentityUserRequest, IdentityUser>();
+            CreateMap<IdentityUserRequest, User>();
         }
     }
 }

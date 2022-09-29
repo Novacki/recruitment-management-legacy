@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using IdentityServer.Domain.Entities.Users;
 using System.Security.Claims;
 
 namespace IdentityServer.Domain.Services.Users.Interfaces
 {
     public interface IUserService
     {
-        Task CreateUserAsync(IdentityUser user, string password);
-        Task<IEnumerable<string>> GetUserRolesAsync(IdentityUser userLogin);
-        Task<IEnumerable<Claim>> GetUserClaimsAsync(IdentityUser userLogin);
+        Task CreateUserAsync(User user, string password);
+        Task<IEnumerable<string>> GetUserRolesAsync(User userLogin);
+        Task<IEnumerable<Claim>> GetUserClaimsAsync(User userLogin);
     }
 }

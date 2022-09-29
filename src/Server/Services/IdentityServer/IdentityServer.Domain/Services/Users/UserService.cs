@@ -1,47 +1,47 @@
 ﻿using IdentityServer.Domain.Constants.ErrorMessages;
+using IdentityServer.Domain.Data.Repositories.Users;
+using IdentityServer.Domain.Entities.Users;
 using IdentityServer.Domain.Exceptions.Services.Auth;
 using IdentityServer.Domain.Helpers.Extensions.Commons;
 using IdentityServer.Domain.Services.Users.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
 namespace IdentityServer.Domain.Services.Users
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<IdentityUser> _userMananger;
+        private readonly IUserRepository _userRepository;
 
         public UserService(
-            UserManager<IdentityUser> userMananger)
+            IUserRepository userRepository)
         {
-            _userMananger = userMananger;
+            _userRepository = userRepository;
         }
 
-        public async Task CreateUserAsync(IdentityUser user, string password)
+        public async Task CreateUserAsync(User user, string password)
         {
-            var identityResult = await _userMananger.CreateAsync(user, password);
-            var haveErrosInCreation = !identityResult.Succeeded;
+            var haveErrosInCreation = !(await _userRepository.CreateAsync(user, password));
 
             if (haveErrosInCreation)
                 throw new UserNotCreatedException(UserErrorMessages.UserNotCreated);
         }
 
-        public async Task<IEnumerable<Claim>> GetUserClaimsAsync(IdentityUser userLogin)
+        public async Task<IEnumerable<Claim>> GetUserClaimsAsync(User userLogin)
         {
-            var user = await _userMananger.FindByEmailAsync(userLogin.Email);
+            var user = await _userRepository.GetByEmailAsync(userLogin.Email);
             if (user.NotExist())
                 throw new UserNotFoundException(UserErrorMessages.UserNotFound);
 
-            return await _userMananger.GetClaimsAsync(user);
+            return await _userRepository.GetClaimsAsync(user);
         }
 
-        public async Task<IEnumerable<string>> GetUserRolesAsync(IdentityUser userLogin)
+        public async Task<IEnumerable<string>> GetUserRolesAsync(User userLogin)
         {
-            var user = await _userMananger.FindByEmailAsync(userLogin.Email);
+            var user = await _userRepository.GetByEmailAsync(userLogin.Email);
             if (user.NotExist())
                 throw new UserNotFoundException(UserErrorMessages.UserNotFound);
 
-            return await _userMananger.GetRolesAsync(user);
+            return await _userRepository.GetRolesAsync(user);
         }
     }
 }

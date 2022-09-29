@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using IdentityServer.Domain.Entities.Users;
 
 namespace IdentityServer.Domain.Services.Auth.Interfaces
 {
     public interface IAuthService
     {
-        Task<IdentityUser> SignInAsync(IdentityUser userLogin, string password);
+        Task<User> SignInAsync(User userLogin, string password);
     }
 }

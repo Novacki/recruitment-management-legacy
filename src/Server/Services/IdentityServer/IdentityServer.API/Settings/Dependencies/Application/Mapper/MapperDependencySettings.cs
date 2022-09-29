@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IdentityServer.API.Application.Mapper.Requests;
 using IdentityServer.API.Application.Mapper.Responses;
+using IdentityServer.Infrastructure.Mapper.Users;
 
 namespace IdentityServer.API.Settings.Dependencies.Application.Mapper
 {
@@ -12,6 +13,7 @@ namespace IdentityServer.API.Settings.Dependencies.Application.Mapper
             {
                 mc.AddProfile(new MappingRequest());
                 mc.AddProfile(new MappingResponse());
+                mc.AddProfile(new MappingInfrastructureData());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

@@ -1,4 +1,4 @@
-﻿using IdentityServer.Domain.Settings.Dependencies;
+﻿using IdentityServer.Domain.Settings.Dependencies.Services;
 
 namespace IdentityServer.API.Settings.Dependencies.Domain
 {

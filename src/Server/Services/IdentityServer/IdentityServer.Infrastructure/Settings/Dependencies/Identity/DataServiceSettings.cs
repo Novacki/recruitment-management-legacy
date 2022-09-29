@@ -7,13 +7,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace IdentityServer.Infrastructure.Settings.Dependencies
+namespace IdentityServer.Infrastructure.Settings.Dependencies.Identity
 {
     public static class DataServiceSettings
     {
         public static IServiceCollection ConfigureIdentityDatabase(this IServiceCollection services)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>(options => {
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = false;
                 options.Password = new PasswordOptions()

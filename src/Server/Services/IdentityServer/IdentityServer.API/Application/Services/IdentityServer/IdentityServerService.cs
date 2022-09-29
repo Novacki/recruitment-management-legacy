@@ -2,10 +2,10 @@
 using IdentityServer.API.Application.DTO_s.Requests;
 using IdentityServer.API.Application.Helpers.Builders.IdentityServer;
 using IdentityServer.API.Application.Services.IdentityServer.Interfaces;
+using IdentityServer.Domain.Entities.Users;
 using IdentityServer.Domain.Services.Auth.Interfaces;
 using IdentityServer.Domain.Services.Users.Interfaces;
 using IdentityServer4;
-using Microsoft.AspNetCore.Identity;
 
 namespace IdentityServer.API.Application.Services.IdentityServer
 {
@@ -26,11 +26,11 @@ namespace IdentityServer.API.Application.Services.IdentityServer
 
         public async Task<IdentityServerUser> GetAuthenticatedIdentityServerUser(IdentityUserRequest request)
         {
-            var user = await _authService.SignInAsync(_mapper.Map<IdentityUser>(request), request.Password);
+            var user = await _authService.SignInAsync(_mapper.Map<User>(request), request.Password);
             var claims = await _userService.GetUserClaimsAsync(user);
             var roles = await _userService.GetUserRolesAsync(user);
 
-            return new IdentityServerUserBuilder(user.Id)
+            return new IdentityServerUserBuilder(user.Id.ToString())
                             .AddDisplayName(user.UserName)
                             .AddRoles(roles)
                             .AddClaims(claims)

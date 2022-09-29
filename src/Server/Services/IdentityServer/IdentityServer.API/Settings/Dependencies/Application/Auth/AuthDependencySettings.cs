@@ -1,5 +1,5 @@
 ﻿using IdentityModel;
-using IdentityServer.Infrastructure.Settings.Dependencies;
+using IdentityServer.Infrastructure.Settings.Dependencies.Identity;
 using IdentityServer4.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
