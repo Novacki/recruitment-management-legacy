@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using IdentityServer.Domain.Data.Repositories.Users;
+using IdentityServer.Domain.DTO_s.Common;
 using IdentityServer.Domain.Entities.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace IdentityServer.Infrastructure.Data.Repositories.Users
@@ -22,6 +24,18 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
         public async Task<bool> CreateAsync(User user, string password) =>
             (await _userMananger.CreateAsync(_mapper.Map<IdentityUser>(user), password)).Succeeded;
 
+        public async Task<BasePaginationDTO<User>> GetAllAsync(PaginationDTO<User> pagination) =>
+            new BasePaginationDTO<User>
+            {
+                Data = _mapper.Map<IEnumerable<User>>(await AsNoTracking()
+                                                        .Skip(pagination.Page * pagination.ItemsPerPage)
+                                                        .Take(pagination.ItemsPerPage)
+                                                        .ToListAsync()),
+
+                TotalItems = await AsNoTracking().CountAsync()
+            };
+        
+
         public async Task<User> GetByEmailAsync(string email) =>
             _mapper.Map<User>(await _userMananger.FindByEmailAsync(email));
         
@@ -30,6 +44,8 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
         
         public async Task<IEnumerable<string>> GetRolesAsync(User user) =>
             await _userMananger.GetRolesAsync(_mapper.Map<IdentityUser>(user));
-        
+
+        private IQueryable<IdentityUser> AsNoTracking() =>
+            _userMananger.Users.AsNoTracking();
     }
 }
