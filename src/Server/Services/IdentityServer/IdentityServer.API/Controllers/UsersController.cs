@@ -2,7 +2,6 @@
 using IdentityServer.API.Application.ViewModels.Common.Pagination;
 using IdentityServer.API.Application.ViewModels.Users;
 using IdentityServer.Domain.DTO_s.Common.Pagination;
-using IdentityServer.Domain.Entities.Users;
 using IdentityServer.Domain.Services.Users.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
