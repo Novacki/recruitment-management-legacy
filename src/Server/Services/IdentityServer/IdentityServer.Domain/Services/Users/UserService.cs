@@ -1,5 +1,6 @@
 ﻿using IdentityServer.Domain.Constants.ErrorMessages;
 using IdentityServer.Domain.Data.Repositories.Users;
+using IdentityServer.Domain.DTO_s.Common.Pagination;
 using IdentityServer.Domain.Entities.Users;
 using IdentityServer.Domain.Exceptions.Services.Auth;
 using IdentityServer.Domain.Helpers.Extensions.Commons;
@@ -18,7 +19,7 @@ namespace IdentityServer.Domain.Services.Users
             _userRepository = userRepository;
         }
 
-        public async Task CreateUserAsync(User user, string password)
+        public async Task CreateAsync(User user, string password)
         {
             var haveErrosInCreation = !(await _userRepository.CreateAsync(user, password));
 
@@ -26,7 +27,10 @@ namespace IdentityServer.Domain.Services.Users
                 throw new UserNotCreatedException(UserErrorMessages.UserNotCreated);
         }
 
-        public async Task<IEnumerable<Claim>> GetUserClaimsAsync(User userLogin)
+        public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
+           await _userRepository.GetAllAsync(pagination);
+        
+        public async Task<IEnumerable<Claim>> GetClaimsAsync(User userLogin)
         {
             var user = await _userRepository.GetByEmailAsync(userLogin.Email);
             if (user.NotExist())
@@ -35,7 +39,7 @@ namespace IdentityServer.Domain.Services.Users
             return await _userRepository.GetClaimsAsync(user);
         }
 
-        public async Task<IEnumerable<string>> GetUserRolesAsync(User userLogin)
+        public async Task<IEnumerable<string>> GetRolesAsync(User userLogin)
         {
             var user = await _userRepository.GetByEmailAsync(userLogin.Email);
             if (user.NotExist())

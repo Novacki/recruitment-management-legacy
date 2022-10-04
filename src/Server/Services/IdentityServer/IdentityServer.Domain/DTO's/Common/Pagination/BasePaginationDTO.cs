@@ -1,8 +1,8 @@
 ﻿using IdentityServer.Domain.Entities;
 
-namespace IdentityServer.Domain.DTO_s.Common
+namespace IdentityServer.Domain.DTO_s.Common.Pagination
 {
-    public class PaginationDTO<T> : BasePaginationDTO<T> where T : BaseEntity
+    public class BasePaginationDTO
     {
         public int Page { get; set; }
         public int ItemsPerPage { get; set; }

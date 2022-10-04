@@ -1,4 +1,4 @@
-﻿namespace IdentityServer.API.Application.ViewModels.Common
+﻿namespace IdentityServer.API.Application.ViewModels.Common.Pagination
 {
     public class BasePaginationViewModel<T> where T : IViewModel
     {

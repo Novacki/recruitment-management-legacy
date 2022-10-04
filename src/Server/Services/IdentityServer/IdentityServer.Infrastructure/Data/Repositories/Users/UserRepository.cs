@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using IdentityServer.Domain.Data.Repositories.Users;
-using IdentityServer.Domain.DTO_s.Common;
+using IdentityServer.Domain.DTO_s.Common.Pagination;
 using IdentityServer.Domain.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace IdentityServer.Infrastructure.Data.Repositories.Users
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private readonly IMapper _mapper;
         private readonly UserManager<IdentityUser> _userMananger;
@@ -24,11 +24,11 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
         public async Task<bool> CreateAsync(User user, string password) =>
             (await _userMananger.CreateAsync(_mapper.Map<IdentityUser>(user), password)).Succeeded;
 
-        public async Task<BasePaginationDTO<User>> GetAllAsync(PaginationDTO<User> pagination) =>
-            new BasePaginationDTO<User>
+        public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
+            new PaginationResponseDTO<User>
             {
                 Data = _mapper.Map<IEnumerable<User>>(await AsNoTracking()
-                                                        .Skip(pagination.Page * pagination.ItemsPerPage)
+                                                        .Skip(GetPage(pagination))
                                                         .Take(pagination.ItemsPerPage)
                                                         .ToListAsync()),
 

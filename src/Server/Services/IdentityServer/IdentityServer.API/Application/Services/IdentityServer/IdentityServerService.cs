@@ -27,8 +27,8 @@ namespace IdentityServer.API.Application.Services.IdentityServer
         public async Task<IdentityServerUser> GetAuthenticatedIdentityServerUser(IdentityUserRequest request)
         {
             var user = await _authService.SignInAsync(_mapper.Map<User>(request), request.Password);
-            var claims = await _userService.GetUserClaimsAsync(user);
-            var roles = await _userService.GetUserRolesAsync(user);
+            var claims = await _userService.GetClaimsAsync(user);
+            var roles = await _userService.GetRolesAsync(user);
 
             return new IdentityServerUserBuilder(user.Id.ToString())
                             .AddDisplayName(user.UserName)
