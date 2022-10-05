@@ -11,6 +11,15 @@ main {
     height: 100%;
 }
 
+.form-input {
+    caret-color: white;
+}
+
+.form-input, .form-input:focus {
+    color: white !important;
+    border-color: white;
+}
+
 .register-btn {
     background-color: rgba(21,25,29, 0.8);
     color: white;
