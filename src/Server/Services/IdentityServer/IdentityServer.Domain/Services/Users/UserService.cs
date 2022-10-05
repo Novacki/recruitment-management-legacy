@@ -21,10 +21,12 @@ namespace IdentityServer.Domain.Services.Users
 
         public async Task CreateAsync(User user, string password)
         {
-            var haveErrosInCreation = !(await _userRepository.CreateAsync(user, password));
+            await EmailExistValidation(user.Email);
 
+            var userResponse = await _userRepository.CreateAsync(user, password);
+            var haveErrosInCreation = !userResponse.Succeeded;
             if (haveErrosInCreation)
-                throw new UserNotCreatedException(UserErrorMessages.UserNotCreated);
+                throw new UserNotCreatedException(UserErrorMessages.GetCreatedUserErrors(userResponse.Errors));
         }
 
         public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
@@ -46,6 +48,13 @@ namespace IdentityServer.Domain.Services.Users
                 throw new UserNotFoundException(UserErrorMessages.UserNotFound);
 
             return await _userRepository.GetRolesAsync(user);
+        }
+
+        private async Task EmailExistValidation(string email)
+        {
+            var existingUser = await _userRepository.GetByEmailAsync(email);
+            if (existingUser.Exist())
+                throw new UserNotFoundException(UserErrorMessages.UserEmailAlreadyExist);
         }
     }
 }

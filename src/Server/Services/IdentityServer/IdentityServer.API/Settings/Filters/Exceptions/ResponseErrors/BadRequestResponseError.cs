@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors
+﻿namespace IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors
 {
     public class BadRequestResponseError : BaseResponseError
     {

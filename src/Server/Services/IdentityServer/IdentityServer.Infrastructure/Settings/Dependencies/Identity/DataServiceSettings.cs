@@ -16,7 +16,7 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies.Identity
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
-                options.User.RequireUniqueEmail = false;
+                options.User.RequireUniqueEmail = true;
                 options.Password = new PasswordOptions()
                 {
                     RequireUppercase = true,

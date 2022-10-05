@@ -2,6 +2,7 @@
 using IdentityServer.API.Application.ViewModels.Common.Pagination;
 using IdentityServer.API.Application.ViewModels.Users;
 using IdentityServer.Domain.DTO_s.Common.Pagination;
+using IdentityServer.Domain.Entities.Users;
 using IdentityServer.Domain.Services.Users.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,5 +27,15 @@ namespace IdentityServer.API.Controllers
         
         [HttpGet]
         public IActionResult Create() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateUserViewModel userViewModel)
+        {
+            if (InvalidRequest())
+                return View(userViewModel);
+
+            await _userService.CreateAsync(_mapper.Map<User>(userViewModel), userViewModel.Password);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

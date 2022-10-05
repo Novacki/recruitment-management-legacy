@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IdentityServer.Domain.Data.Repositories.Users;
 using IdentityServer.Domain.DTO_s.Common.Pagination;
+using IdentityServer.Domain.DTO_s.User;
 using IdentityServer.Domain.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,8 +22,8 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
             _mapper = mapper;
         }
 
-        public async Task<bool> CreateAsync(User user, string password) =>
-            (await _userMananger.CreateAsync(_mapper.Map<IdentityUser>(user), password)).Succeeded;
+        public async Task<CreatedUserResponseDTO> CreateAsync(User user, string password) =>
+           _mapper.Map<CreatedUserResponseDTO>(await _userMananger.CreateAsync(_mapper.Map<IdentityUser>(user), password));
 
         public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
             new PaginationResponseDTO<User>

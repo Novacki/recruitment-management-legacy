@@ -7,7 +7,7 @@ namespace IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors
 {
     public abstract class BaseResponseError : ViewResult
     {
-        public string Message { get; private set; }
+        public string Message { get; protected set; }
 
         protected BaseResponseError(string message, int statusCode)
         {
@@ -17,15 +17,10 @@ namespace IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors
 
         public override async Task ExecuteResultAsync(ActionContext context)
         {
-
-            SetViewName(context)
-                .SetViewData(context)
-                .SetTempData(context)
-                .SetViewEngine(context)
-                .SetViewName(context)
+            SetViewData(context)
                 .SetErrorMessage();
 
-           await base.ExecuteResultAsync(context);
+            await base.ExecuteResultAsync(context);
         }
 
         protected BaseResponseError SetViewName(ActionContext context)

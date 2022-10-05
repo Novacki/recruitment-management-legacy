@@ -4,6 +4,7 @@
     {
         public User(string userName)
         {
+            Id = Guid.NewGuid();
             UserName = userName;
             ConcurrencyStamp = Guid.NewGuid();
         }
