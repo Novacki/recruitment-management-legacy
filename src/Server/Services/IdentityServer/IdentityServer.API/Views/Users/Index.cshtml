@@ -18,18 +18,29 @@
             <tr>
                 <th scope="col">Usuário</th>
                 <th scope="col">E-mail</th>
+                <th scope="col">Telefone</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
-        @foreach (var user in Model.Data)
-        {
-            <tbody>
-                <tr>
-                  <td>@user.UserName</td>
-                  <td>@user.Email</td>
-                  <td></td>
-                </tr>
-            </tbody>
-        }
+        <tbody>
+            @foreach (var user in Model.Data)
+            {
+                    <tr>
+                      <td>@user.UserName</td>
+                      <td>@user.Email</td>
+                      <td>@user.PhoneNumber</td>
+                      <td>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a asp-action="update" class="action-btn btn">Editar</a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="action-btn btn">Remover</a>
+                            </div>
+                        </div>
+                      </td>
+                    </tr>
+            }
+        </tbody>
     </table>
 </div>
