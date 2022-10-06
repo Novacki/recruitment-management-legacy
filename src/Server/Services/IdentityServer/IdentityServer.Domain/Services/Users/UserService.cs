@@ -31,6 +31,9 @@ namespace IdentityServer.Domain.Services.Users
 
         public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
            await _userRepository.GetAllAsync(pagination);
+
+        public async Task<User> GetByIdAsync(Guid id) =>
+            await _userRepository.GetByIdAsync(id);
         
         public async Task<IEnumerable<Claim>> GetClaimsAsync(User userLogin)
         {

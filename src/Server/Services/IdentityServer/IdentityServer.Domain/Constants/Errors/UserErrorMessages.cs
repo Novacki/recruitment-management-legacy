@@ -25,7 +25,8 @@ namespace IdentityServer.Domain.Constants.ErrorMessages
         {
             { "PasswordRequiresUpper", "A senha deve possuir ao menos 1 letra maiúscula" },
             { "PasswordTooShort", "A senha deve possuir uma quantidade maior de caracteres" },
-            { "DuplicateUserName", "Usuário já cadastrado" }
+            { "DuplicateUserName", "Usuário já cadastrado" },
+            { "InvalidUserName", "Nome do usuário é somente permitido letras e números" }
         };
     }
 }

@@ -16,6 +16,7 @@ namespace IdentityServer.API.Application.Mapper.Responses
 
             CreateMap<IdentityUser, IdentityUserResponse>();
             CreateMap<User, UserViewModel>();
+            CreateMap<User, CreateUserViewModel>();
         }
     }
 }

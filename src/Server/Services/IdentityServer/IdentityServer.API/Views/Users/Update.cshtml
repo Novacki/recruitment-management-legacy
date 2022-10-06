@@ -1,0 +1,8 @@
+﻿@using IdentityServer.API.Application.ViewModels.Users
+@model CreateUserViewModel
+
+@{
+	ViewData["Title"] = "Edição de usuário";
+}
+
+@await Html.PartialAsync("./Partials/_UserFormPartial", Model)

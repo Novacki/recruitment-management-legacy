@@ -8,6 +8,7 @@ namespace IdentityServer.Domain.Services.Users.Interfaces
     {
         Task CreateAsync(User user, string password);
         Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination);
+        Task<User> GetByIdAsync(Guid id);   
         Task<IEnumerable<string>> GetRolesAsync(User userLogin);
         Task<IEnumerable<Claim>> GetClaimsAsync(User userLogin);
     }

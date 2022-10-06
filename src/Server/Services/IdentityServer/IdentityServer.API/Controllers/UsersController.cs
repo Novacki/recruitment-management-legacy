@@ -37,5 +37,10 @@ namespace IdentityServer.API.Controllers
             await _userService.CreateAsync(_mapper.Map<User>(userViewModel), userViewModel.Password);
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Update(Guid id) =>
+            View(_mapper.Map<CreateUserViewModel>(await _userService.GetByIdAsync(id)));
+        
     }
 }

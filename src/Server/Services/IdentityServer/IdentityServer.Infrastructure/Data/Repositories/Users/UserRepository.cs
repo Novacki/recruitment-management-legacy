@@ -36,10 +36,12 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
                 TotalItems = await AsNoTracking().CountAsync()
             };
         
+        public async Task<User> GetByIdAsync(Guid id) =>
+            _mapper.Map<User>(await _userMananger.FindByIdAsync(id.ToString()));
 
         public async Task<User> GetByEmailAsync(string email) =>
             _mapper.Map<User>(await _userMananger.FindByEmailAsync(email));
-        
+
         public async Task<IEnumerable<Claim>> GetClaimsAsync(User user) =>
             await _userMananger.GetClaimsAsync(_mapper.Map<IdentityUser>(user));
         
