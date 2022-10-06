@@ -22,8 +22,11 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
             _mapper = mapper;
         }
 
-        public async Task<CreatedUserResponseDTO> CreateAsync(User user, string password) =>
-           _mapper.Map<CreatedUserResponseDTO>(await _userMananger.CreateAsync(_mapper.Map<IdentityUser>(user), password));
+        public async Task<UserResultDTO> CreateAsync(User user, string password) =>
+           _mapper.Map<UserResultDTO>(await _userMananger.CreateAsync(_mapper.Map<IdentityUser>(user), password));
+
+        public async Task<UserResultDTO> UpdateAsync(User user) =>
+           _mapper.Map<UserResultDTO>(await _userMananger.UpdateAsync(_mapper.Map<IdentityUser>(user)));
 
         public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
             new PaginationResponseDTO<User>

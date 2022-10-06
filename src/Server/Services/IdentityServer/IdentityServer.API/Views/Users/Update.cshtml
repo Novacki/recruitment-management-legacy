@@ -3,6 +3,7 @@
 
 @{
 	ViewData["Title"] = "Edição de usuário";
+	ViewData["FormAction"] = "Update";
 }
 
 @await Html.PartialAsync("./Partials/_UserFormPartial", Model)

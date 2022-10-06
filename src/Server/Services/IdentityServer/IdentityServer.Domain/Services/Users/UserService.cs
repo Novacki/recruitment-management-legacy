@@ -1,6 +1,7 @@
 ﻿using IdentityServer.Domain.Constants.ErrorMessages;
 using IdentityServer.Domain.Data.Repositories.Users;
 using IdentityServer.Domain.DTO_s.Common.Pagination;
+using IdentityServer.Domain.DTO_s.User;
 using IdentityServer.Domain.Entities.Users;
 using IdentityServer.Domain.Exceptions.Services.Auth;
 using IdentityServer.Domain.Helpers.Extensions.Commons;
@@ -21,13 +22,19 @@ namespace IdentityServer.Domain.Services.Users
 
         public async Task CreateAsync(User user, string password)
         {
-            await EmailExistValidation(user.Email);
-
-            var userResponse = await _userRepository.CreateAsync(user, password);
-            var haveErrosInCreation = !userResponse.Succeeded;
-            if (haveErrosInCreation)
-                throw new UserNotCreatedException(UserErrorMessages.GetCreatedUserErrors(userResponse.Errors));
+            await EmailExistValidator(user);
+            var userResult = await _userRepository.CreateAsync(user, password);
+            UserResultValidator(userResult);
         }
+
+        public async Task UpdateAsync(Guid id, User user)
+        {
+            //FIX HERE
+            await EmailExistValidator(user);
+            var userResult = await _userRepository.UpdateAsync(user);
+            UserResultValidator(userResult);
+        }
+
 
         public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
            await _userRepository.GetAllAsync(pagination);
@@ -53,11 +60,21 @@ namespace IdentityServer.Domain.Services.Users
             return await _userRepository.GetRolesAsync(user);
         }
 
-        private async Task EmailExistValidation(string email)
+        #region Private Methods
+        private async Task EmailExistValidator(User user)
         {
-            var existingUser = await _userRepository.GetByEmailAsync(email);
-            if (existingUser.Exist())
+            var existingUser = await _userRepository.GetByEmailAsync(user.Email);
+            var userAlreadyExistWithEmail = existingUser.Exist() && existingUser.Id != user.Id;
+            if (userAlreadyExistWithEmail)
                 throw new UserNotFoundException(UserErrorMessages.UserEmailAlreadyExist);
         }
+
+        private void UserResultValidator(UserResultDTO userResult)
+        {
+            var haveErrors = !userResult.Succeeded;
+            if (haveErrors)
+                throw new UserNotCreatedException(UserErrorMessages.GetUserResultErrors(userResult.Errors));
+        }
+        #endregion
     }
 }

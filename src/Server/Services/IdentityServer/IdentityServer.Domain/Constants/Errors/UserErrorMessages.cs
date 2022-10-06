@@ -10,18 +10,18 @@ namespace IdentityServer.Domain.Constants.ErrorMessages
         public static string UserNotCreated = "Não foi possível criar o usuário";
 
 
-        public static string GetCreatedUserErrors(IEnumerable<UserErrorResponseDTO> errors) =>
-            GenerateCreatedUserErrorMessage(errors.Select(error => error.Code));
+        public static string GetUserResultErrors(IEnumerable<UserResultErrorDTO> errors) =>
+            GenerateUserResultErrorsMessage(errors.Select(error => error.Code));
        
-        private static string GenerateCreatedUserErrorMessage(IEnumerable<string> codErrors)
+        private static string GenerateUserResultErrorsMessage(IEnumerable<string> codErrors)
         {
             const string SEPARATOR = ". ";
-            return string.Join(SEPARATOR, CreatedUserErrors
-                                                .Where(error => codErrors.Contains(error.Key))
-                                                .Select(error => error.Value));
+            return string.Join(SEPARATOR, UserResultErrors
+                                               .Where(error => codErrors.Contains(error.Key))
+                                               .Select(error => error.Value));
         }
 
-        private static Dictionary<string, string> CreatedUserErrors => new Dictionary<string, string>()
+        private static Dictionary<string, string> UserResultErrors => new Dictionary<string, string>()
         {
             { "PasswordRequiresUpper", "A senha deve possuir ao menos 1 letra maiúscula" },
             { "PasswordTooShort", "A senha deve possuir uma quantidade maior de caracteres" },

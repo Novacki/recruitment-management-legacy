@@ -7,6 +7,7 @@ namespace IdentityServer.Domain.Services.Users.Interfaces
     public interface IUserService
     {
         Task CreateAsync(User user, string password);
+        Task UpdateAsync(Guid id, User user);
         Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination);
         Task<User> GetByIdAsync(Guid id);   
         Task<IEnumerable<string>> GetRolesAsync(User userLogin);

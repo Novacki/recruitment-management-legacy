@@ -41,6 +41,15 @@ namespace IdentityServer.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Update(Guid id) =>
             View(_mapper.Map<CreateUserViewModel>(await _userService.GetByIdAsync(id)));
-        
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Update(Guid id, CreateUserViewModel userViewModel)
+        {
+            if (InvalidRequest())
+                return View(userViewModel);
+
+            await _userService.UpdateAsync(_mapper.Map<User>(userViewModel));
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

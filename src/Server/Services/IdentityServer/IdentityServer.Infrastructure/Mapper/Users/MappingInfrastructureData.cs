@@ -12,8 +12,8 @@ namespace IdentityServer.Infrastructure.Mapper.Users
             #region User
             CreateMap<User, IdentityUser>();
             CreateMap<IdentityUser, User>();
-            CreateMap<IdentityResult, CreatedUserResponseDTO>();
-            CreateMap<IdentityError, UserErrorResponseDTO>();
+            CreateMap<IdentityResult, UserResultDTO>();
+            CreateMap<IdentityError, UserResultErrorDTO>();
             #endregion
         }
     }
