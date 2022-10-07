@@ -7,8 +7,9 @@ namespace IdentityServer.Domain.Constants.ErrorMessages
         public static string UserNotAuthenticated = "E-mail ou senha incorretos";
         public static string UserNotFound = "Usuário não encontrado";
         public static string UserEmailAlreadyExist = "E-mail já cadastrado";
-        public static string UserEmailInvalid = "E-mail inválido";
         public static string UserNotCreated = "Não foi possível criar o usuário";
+        public static string InvalidUserEmail = "E-mail inválido";
+        public static string InvalidUserName = "Nome do usuário inválido";
 
 
         public static string GetUserResultErrors(IEnumerable<UserResultErrorDTO> errors) =>

@@ -1,10 +1,11 @@
-﻿using IdentityServer.Infrastructure.Settings.Constants;
+﻿using IdentityServer.Domain.Data.UnitOfWork;
+using IdentityServer.Infrastructure.Settings.Constants;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer.Infrastructure.Data.Contexts
 {
-    public class IdentityDataContext : IdentityDbContext
+    public class IdentityDataContext : IdentityDbContext, IUnitOfWork
     {
         public IdentityDataContext(DbContextOptions<IdentityDataContext> options) : base(options) {}
         protected override void OnModelCreating(ModelBuilder modelBuilder)

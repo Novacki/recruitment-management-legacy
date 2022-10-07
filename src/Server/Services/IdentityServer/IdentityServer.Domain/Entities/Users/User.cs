@@ -27,11 +27,15 @@ namespace IdentityServer.Domain.Entities.Users
         public bool LockoutEnabled { get; private set; }
         public int AccessFailedCount { get; private set; }
 
-        public void Update(string email, string phoneNumber)
+        public void Update(string userName, string email, string phoneNumber)
         {
-            if(string.IsNullOrEmpty(email))
-                throw new InvalidUserEmailDomainException(UserErrorMessages.UserEmailInvalid);
+            if (string.IsNullOrEmpty(userName))
+                throw new InvalidUserNameDomainException(UserErrorMessages.InvalidUserName);
 
+            if(string.IsNullOrEmpty(email))
+                throw new InvalidUserEmailDomainException(UserErrorMessages.InvalidUserEmail);
+
+            UserName = userName;
             Email = email;
             PhoneNumber = phoneNumber;
         }

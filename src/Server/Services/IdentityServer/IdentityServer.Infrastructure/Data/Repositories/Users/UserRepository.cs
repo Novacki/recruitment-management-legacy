@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IdentityServer.Domain.Data.Repositories.Users;
+using IdentityServer.Domain.Data.UnitOfWork;
 using IdentityServer.Domain.DTO_s.Common.Pagination;
 using IdentityServer.Domain.DTO_s.User;
 using IdentityServer.Domain.Entities.Users;
@@ -15,11 +16,12 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
         private readonly UserManager<IdentityUser> _userMananger;
 
         public UserRepository(
-            UserManager<IdentityUser> userMananger, 
-            IMapper mapper)
+            IUnitOfWork unitOfwork, 
+            IMapper mapper, 
+            UserManager<IdentityUser> userMananger) : base(unitOfwork)
         {
-            _userMananger = userMananger;
             _mapper = mapper;
+            _userMananger = userMananger;
         }
 
         public async Task<UserResultDTO> CreateAsync(User user, string password) =>
@@ -40,10 +42,10 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
             };
         
         public async Task<User> GetByIdAsync(Guid id) =>
-            _mapper.Map<User>(await _userMananger.FindByIdAsync(id.ToString()));
+            _mapper.Map<User>(await AsNoTracking().FirstOrDefaultAsync(user => user.Id == id.ToString()));
 
         public async Task<User> GetByEmailAsync(string email) =>
-            _mapper.Map<User>(await _userMananger.FindByEmailAsync(email));
+            _mapper.Map<User>(await AsNoTracking().FirstOrDefaultAsync(user => email.Equals(user.Email)));
 
         public async Task<IEnumerable<Claim>> GetClaimsAsync(User user) =>
             await _userMananger.GetClaimsAsync(_mapper.Map<IdentityUser>(user));

@@ -32,7 +32,7 @@ namespace IdentityServer.Domain.Services.Users
             await EmailExistValidator(id, user.Email);
 
             var updatedUser = await _userRepository.GetByIdAsync(id);
-            updatedUser.Update(user.Email, user.PhoneNumber);
+            updatedUser.Update(user.UserName, user.Email, user.PhoneNumber);
 
             var userResult = await _userRepository.UpdateAsync(updatedUser);
             UserResultValidator(userResult);

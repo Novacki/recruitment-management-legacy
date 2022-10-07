@@ -39,7 +39,10 @@ namespace IdentityServer.Infrastructure.Settings.Dependencies.Identity
         public static IServiceCollection ConfigureDatabase(this IServiceCollection services, string connectionString) =>
             services
                 .AddDbContext<IdentityDataContext>(options =>
-                    options.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(GetMigrationsAssemblyName())))
+                {
+                    options.EnableSensitiveDataLogging();
+                    options.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(GetMigrationsAssemblyName()));
+                })
                 .AddHostedService<ExecuteBackgroundMigration>();
 
 
