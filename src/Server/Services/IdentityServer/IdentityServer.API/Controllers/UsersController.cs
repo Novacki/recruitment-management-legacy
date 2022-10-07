@@ -48,7 +48,7 @@ namespace IdentityServer.API.Controllers
             if (InvalidRequest())
                 return View(userViewModel);
 
-            await _userService.UpdateAsync(_mapper.Map<User>(userViewModel));
+            await _userService.UpdateAsync(id, _mapper.Map<User>(userViewModel));
             return RedirectToAction(nameof(Index));
         }
     }

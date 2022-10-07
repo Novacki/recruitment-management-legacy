@@ -1,4 +1,7 @@
-﻿namespace IdentityServer.Domain.Entities.Users
+﻿using IdentityServer.Domain.Constants.ErrorMessages;
+using IdentityServer.Domain.Exceptions.Domain.Users;
+
+namespace IdentityServer.Domain.Entities.Users
 {
     public class User : BaseEntity
     {
@@ -23,5 +26,14 @@
         public DateTimeOffset? LockoutEnd { get; private set; }
         public bool LockoutEnabled { get; private set; }
         public int AccessFailedCount { get; private set; }
+
+        public void Update(string email, string phoneNumber)
+        {
+            if(string.IsNullOrEmpty(email))
+                throw new InvalidUserEmailDomainException(UserErrorMessages.UserEmailInvalid);
+
+            Email = email;
+            PhoneNumber = phoneNumber;
+        }
     }
 }

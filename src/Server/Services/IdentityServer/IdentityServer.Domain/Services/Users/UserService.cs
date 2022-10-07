@@ -19,22 +19,24 @@ namespace IdentityServer.Domain.Services.Users
         {
             _userRepository = userRepository;
         }
-
+        
         public async Task CreateAsync(User user, string password)
         {
-            await EmailExistValidator(user);
+            await EmailExistValidator(user.Email);
             var userResult = await _userRepository.CreateAsync(user, password);
             UserResultValidator(userResult);
         }
 
         public async Task UpdateAsync(Guid id, User user)
         {
-            //FIX HERE
-            await EmailExistValidator(user);
-            var userResult = await _userRepository.UpdateAsync(user);
+            await EmailExistValidator(id, user.Email);
+
+            var updatedUser = await _userRepository.GetByIdAsync(id);
+            updatedUser.Update(user.Email, user.PhoneNumber);
+
+            var userResult = await _userRepository.UpdateAsync(updatedUser);
             UserResultValidator(userResult);
         }
-
 
         public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
            await _userRepository.GetAllAsync(pagination);
@@ -61,10 +63,17 @@ namespace IdentityServer.Domain.Services.Users
         }
 
         #region Private Methods
-        private async Task EmailExistValidator(User user)
+        private async Task EmailExistValidator(string email)
         {
-            var existingUser = await _userRepository.GetByEmailAsync(user.Email);
-            var userAlreadyExistWithEmail = existingUser.Exist() && existingUser.Id != user.Id;
+            var existingUser = await _userRepository.GetByEmailAsync(email);
+            if (existingUser.Exist())
+                throw new UserNotFoundException(UserErrorMessages.UserEmailAlreadyExist);
+        }
+
+        private async Task EmailExistValidator(Guid id, string email)
+        {
+            var existingUser = await _userRepository.GetByEmailAsync(email);
+            var userAlreadyExistWithEmail = existingUser.Exist() && existingUser.Id != id;
             if (userAlreadyExistWithEmail)
                 throw new UserNotFoundException(UserErrorMessages.UserEmailAlreadyExist);
         }

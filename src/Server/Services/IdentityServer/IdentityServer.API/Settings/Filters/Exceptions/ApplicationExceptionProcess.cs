@@ -1,5 +1,6 @@
 ﻿using IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors;
 using IdentityServer.Domain.Exceptions;
+using IdentityServer.Domain.Exceptions.Domain;
 using IdentityServer.Domain.Exceptions.Services;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -17,9 +18,10 @@ namespace IdentityServer.API.Settings.Filters.Exceptions
         private Dictionary<Type, BaseResponseError> ExceptionResults => new()
         {
             { typeof(NotFoundServiceException),  new NotFoundResponseError(_context.Exception.Message, StatusCodes.Status404NotFound) },
-            { typeof(InvalidOperationServiceException),  new BadRequestResponseError(_context.Exception.Message, StatusCodes.Status400BadRequest) },
+            { typeof(InvalidOperationServiceException), new BadRequestResponseError(_context.Exception.Message, StatusCodes.Status400BadRequest) },
+            { typeof(InvalidOperationDomainException), new BadRequestResponseError(_context.Exception.Message, StatusCodes.Status400BadRequest) }
         };
-
+        
         private BaseResponseError DefaultExceptionResult => new InternalServerResponseError(_context.Exception.Message, StatusCodes.Status500InternalServerError);
 
         public string GetErrorMessage() => $"Error: {_context.Exception.Message} {_context.Exception.StackTrace}";
