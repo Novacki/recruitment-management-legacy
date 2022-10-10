@@ -57,3 +57,27 @@ main {
     background-color: rgba(21,25,29, 0.6);
     color: white;
 }
+
+.table-responsive {
+    max-height: 58vh;
+    overflow-y: scroll;
+    border-radius: 6px;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(21,25,29, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
