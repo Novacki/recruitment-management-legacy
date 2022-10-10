@@ -1,0 +1,10 @@
+﻿.card-error {
+    height: 50%;
+    padding: 2%;
+    max-width: 60%;
+    border-radius: 6px;
+    box-shadow: 5px 5px 5px rgba(35, 32, 32, 0.4);
+    background-color: rgba(21,25,29, 0.7);
+    color: white;
+    margin-top: 2%;
+}

@@ -1,0 +1,15 @@
+﻿@using IdentityServer.API.Application.ViewModels.Errors
+@model ErrorViewModel
+
+@{
+    ViewData["title"] = "Erro";
+}
+
+<div class="d-flex align-items-center justify-content-center">
+    <div class="card-error">
+        <h2>[@Model.StatusCode] - @Model.Error</h2>
+        <div class="error-container mt-5">
+            <h5>Erro: @Model.Message</h5>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,15 @@
 namespace IdentityServer.API.Application.ViewModels.Errors
 {
-    public class ErrorViewModel
+    public class ErrorViewModel : IViewModel
     {
-        public string? RequestId { get; set; }
+        public int StatusCode { get; set; }
+        public string Error { get; set; }
+        public string Message { get; set; }
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+        public ErrorViewModel SetError(string error)
+        {
+            Error = error;
+            return this;
+        }
     }
 }

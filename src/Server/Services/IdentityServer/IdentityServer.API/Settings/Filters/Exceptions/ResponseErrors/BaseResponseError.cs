@@ -68,5 +68,8 @@ namespace IdentityServer.API.Settings.Filters.Exceptions.ResponseErrors
             StatusCode = statusCode;
             return this;
         }
+
+        protected string GetErrorRoute() =>
+            $"/errors/index?Message={Message}&StatusCode={StatusCode.Value}";
     }
 }
