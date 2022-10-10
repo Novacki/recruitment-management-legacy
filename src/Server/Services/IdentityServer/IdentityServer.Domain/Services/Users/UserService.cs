@@ -67,7 +67,7 @@ namespace IdentityServer.Domain.Services.Users
         {
             var existingUser = await _userRepository.GetByEmailAsync(email);
             if (existingUser.Exist())
-                throw new UserNotFoundException(UserErrorMessages.UserEmailAlreadyExist);
+                throw new UserEmailAlreadyExistException(UserErrorMessages.UserEmailAlreadyExist);
         }
 
         private async Task EmailExistValidator(Guid id, string email)
@@ -75,7 +75,7 @@ namespace IdentityServer.Domain.Services.Users
             var existingUser = await _userRepository.GetByEmailAsync(email);
             var userAlreadyExistWithEmail = existingUser.Exist() && existingUser.Id != id;
             if (userAlreadyExistWithEmail)
-                throw new UserNotFoundException(UserErrorMessages.UserEmailAlreadyExist);
+                throw new UserEmailAlreadyExistException(UserErrorMessages.UserEmailAlreadyExist);
         }
 
         private void UserResultValidator(UserResultDTO userResult)
