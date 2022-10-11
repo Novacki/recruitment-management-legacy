@@ -32,9 +32,19 @@ namespace IdentityServer.Domain.Services.Users
             await EmailExistValidator(id, user.Email);
 
             var updatedUser = await _userRepository.GetByIdAsync(id);
+            ExistUserValidator(updatedUser);
             updatedUser.Update(user.UserName, user.Email, user.PhoneNumber);
 
             var userResult = await _userRepository.UpdateAsync(updatedUser);
+            UserResultValidator(userResult);
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var user = await _userRepository.GetByIdAsync(id);
+            ExistUserValidator(user);
+
+            var userResult = await _userRepository.DeleteAsync(user);
             UserResultValidator(userResult);
         }
 
@@ -47,22 +57,24 @@ namespace IdentityServer.Domain.Services.Users
         public async Task<IEnumerable<Claim>> GetClaimsAsync(User userLogin)
         {
             var user = await _userRepository.GetByEmailAsync(userLogin.Email);
-            if (user.NotExist())
-                throw new UserNotFoundException(UserErrorMessages.UserNotFound);
-
+            ExistUserValidator(user);
             return await _userRepository.GetClaimsAsync(user);
         }
 
         public async Task<IEnumerable<string>> GetRolesAsync(User userLogin)
         {
             var user = await _userRepository.GetByEmailAsync(userLogin.Email);
-            if (user.NotExist())
-                throw new UserNotFoundException(UserErrorMessages.UserNotFound);
-
+            ExistUserValidator(user);
             return await _userRepository.GetRolesAsync(user);
         }
 
         #region Private Methods
+
+        public void ExistUserValidator(User user)
+        {
+            if (user.NotExist())
+                throw new UserNotFoundException(UserErrorMessages.UserNotFound);
+        }
         private async Task EmailExistValidator(string email)
         {
             var existingUser = await _userRepository.GetByEmailAsync(email);

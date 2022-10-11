@@ -30,6 +30,9 @@ namespace IdentityServer.Infrastructure.Data.Repositories.Users
         public async Task<UserResultDTO> UpdateAsync(User user) =>
            _mapper.Map<UserResultDTO>(await _userMananger.UpdateAsync(_mapper.Map<IdentityUser>(user)));
 
+        public async Task<UserResultDTO> DeleteAsync(User user) =>
+            _mapper.Map<UserResultDTO>(await _userMananger.DeleteAsync(_mapper.Map<IdentityUser>(user)));
+      
         public async Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination) =>
             new PaginationResponseDTO<User>
             {

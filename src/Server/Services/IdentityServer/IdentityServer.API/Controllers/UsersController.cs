@@ -51,5 +51,12 @@ namespace IdentityServer.API.Controllers
             await _userService.UpdateAsync(id, _mapper.Map<User>(userViewModel));
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _userService.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

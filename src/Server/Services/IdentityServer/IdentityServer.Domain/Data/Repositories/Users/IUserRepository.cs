@@ -10,6 +10,7 @@ namespace IdentityServer.Domain.Data.Repositories.Users
     {
         public Task<UserResultDTO> CreateAsync(User user, string password);
         public Task<UserResultDTO> UpdateAsync(User user);
+        public Task<UserResultDTO> DeleteAsync(User user);
         public Task<PaginationResponseDTO<User>> GetAllAsync(PaginationRequestDTO pagination);
         public Task<User> GetByIdAsync(Guid id);
         public Task<User> GetByEmailAsync(string email);    
